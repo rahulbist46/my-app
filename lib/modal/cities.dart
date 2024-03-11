@@ -1,7 +1,4 @@
 
-
-// your code here
-
 class CitiesModel {
   final String id;
   final String city;
@@ -22,7 +19,7 @@ class CitiesModel {
     city: json['city'],
     country: json['country'],
     state: json['state'],
-    icon: json['icon'] ?? Assets.demoLocation,
+    icon: json['icon']
   );
 
   Map<String, dynamic> toMap() {

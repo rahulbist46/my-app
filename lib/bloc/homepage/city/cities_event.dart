@@ -1,4 +1,10 @@
-part of 'cities_bloc.dart';
+import 'package:equatable/equatable.dart';
 
-@immutable
-abstract class CitiesEvent {}
+abstract class CitiesEvent extends Equatable {
+  const CitiesEvent();
+
+
+  @override
+  List<Object?> get props => [];
+}
+class FetchCitiesEvent extends CitiesEvent {}
