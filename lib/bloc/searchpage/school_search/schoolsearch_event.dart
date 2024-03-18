@@ -1,4 +1,11 @@
-part of 'schoolsearch_bloc.dart';
 
-@immutable
-abstract class SchoolsearchEvent {}
+import 'package:equatable/equatable.dart';
+
+abstract class SchoolSearchEvent extends Equatable{
+
+  const SchoolSearchEvent();
+  @override
+  List<Object> get props=>[];
+
+}
+ class FetchSchoolSearchEvent extends SchoolSearchEvent{}

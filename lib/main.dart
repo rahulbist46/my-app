@@ -1,6 +1,10 @@
 
+import 'package:edhippo/bloc/homepage/category/category_bloc.dart';
 import 'package:edhippo/bloc/homepage/city/cities_bloc.dart';
-import 'package:edhippo/screen_view/homepage/homepage_screen.dart';
+import 'package:edhippo/bloc/homepage/featuredschools/featuredschools_bloc.dart';
+import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_bloc.dart';
+
+import 'package:edhippo/screen_view/search_page/searchbar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,10 +22,14 @@ class MyApp extends StatelessWidget {
     return
       MultiBlocProvider(
         providers: [
+          BlocProvider(create: (_) => CitiesBloc()),
+          BlocProvider(create: (_) => CategoryBloc()),
+          BlocProvider(create: (_) => FeatureSchoolsBloc()),
+          BlocProvider(create: (_) => SchoolSearchBloc()),
 
-          BlocProvider(
-            create: (context) => CitiesBloc(),
-          ),
+
+
+
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
@@ -32,7 +40,7 @@ class MyApp extends StatelessWidget {
 
           ),
           debugShowCheckedModeBanner: false,
-          home:  const HomePage(),
+          home:  const SearchBarScreen(),
 
 
         ),

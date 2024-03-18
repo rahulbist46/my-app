@@ -1,4 +1,5 @@
-import 'package:edhippo/modal/cities.dart';
+
+import 'package:edhippo/modal/city_modal/cities.dart';
 import 'package:edhippo/utils/enums.dart';
 import 'package:equatable/equatable.dart';
 
