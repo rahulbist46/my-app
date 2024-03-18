@@ -1,6 +1,36 @@
-part of 'school_board_bloc.dart';
 
-@immutable
-sealed class SchoolBoardState {}
+ import 'package:edhippo/modal/school_board/school_board.dart';
+import 'package:equatable/equatable.dart';
 
-final class SchoolBoardInitial extends SchoolBoardState {}
+import '../../../utils/enums.dart';
+
+class SchoolBoardState extends  Equatable{
+
+  final DataStatus dataStatus;
+  final List<SchoolBoard> schoolBoardlList;
+  final String message;
+
+
+  const SchoolBoardState({this. dataStatus=DataStatus.loading,
+    this. schoolBoardlList=const[],
+  this.message='',
+  });
+
+  SchoolBoardState copyWith({DataStatus? dataStatus,
+    List<SchoolBoard>? schoolBoardlList,
+    String? message,
+  }){
+
+    return SchoolBoardState(
+    dataStatus:dataStatus?? this.dataStatus ,
+    schoolBoardlList: schoolBoardlList?? this.schoolBoardlList,
+    message: message ?? this.message,
+    );
+ }
+
+
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [dataStatus,schoolBoardlList,message];
+}

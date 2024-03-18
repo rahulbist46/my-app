@@ -1,4 +1,3 @@
-
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_event.dart';
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_state.dart';
 import 'package:edhippo/modal/search_school/search_school_modal.dart';
@@ -8,11 +7,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SchoolSearchBloc extends Bloc<SchoolSearchEvent, SchoolSearchState> {
-   SchoolSearchRepository schoolSearchRepository=SchoolSearchRepository();
+  List<SearchSchool>temSearchSchoolsList=[];
+
+
+  SchoolSearchRepository schoolSearchRepository=SchoolSearchRepository();
 
   SchoolSearchBloc()
-      : super(const SchoolSearchState()) {
+      : super( const SchoolSearchState()) {
     on<FetchSchoolSearchEvent>(_fetchSchoolSearchEvent);
+    on<SearchItem>(_filterList);
   }
 
   void _fetchSchoolSearchEvent(
@@ -42,5 +45,26 @@ class SchoolSearchBloc extends Bloc<SchoolSearchEvent, SchoolSearchState> {
       }
       // Additional error handling logic if needed
     }
+  }
+
+
+  void _filterList(SearchItem event, Emitter<SchoolSearchState> emit) async {
+    if(event.stSearch.isEmpty){
+      emit(state.copyWith(temSearchSchoolsList: [],searchMessage: ''));
+    }else{
+      temSearchSchoolsList = state.searchSchoolsList.where((element) => element.name.toString().toLowerCase().contains(event.stSearch.toLowerCase())).toList();
+
+
+      if(temSearchSchoolsList.isEmpty){
+        emit(state.copyWith(temSearchSchoolsList: temSearchSchoolsList,searchMessage: 'data not found'));
+
+      }else{
+        emit(state.copyWith(temSearchSchoolsList: temSearchSchoolsList));
+      }
+    }
+
+
+
+
   }
 }

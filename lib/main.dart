@@ -1,12 +1,15 @@
 
+import 'package:edhippo/bloc/filter_page/classification/classification_bloc.dart';
+import 'package:edhippo/bloc/filter_page/school_board/school_board_bloc.dart';
 import 'package:edhippo/bloc/homepage/category/category_bloc.dart';
 import 'package:edhippo/bloc/homepage/city/cities_bloc.dart';
 import 'package:edhippo/bloc/homepage/featuredschools/featuredschools_bloc.dart';
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_bloc.dart';
-
-import 'package:edhippo/screen_view/search_page/searchbar_screen.dart';
+import 'package:edhippo/screen_view/homepage/homepage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 
 
 void main() {
@@ -14,8 +17,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({super.key, });
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => CategoryBloc()),
           BlocProvider(create: (_) => FeatureSchoolsBloc()),
           BlocProvider(create: (_) => SchoolSearchBloc()),
+          BlocProvider(create: (_) => SchoolBoardBloc()),
+          BlocProvider(create: (_) => SchoolClassificationBloc()),
 
 
 
@@ -40,7 +44,7 @@ class MyApp extends StatelessWidget {
 
           ),
           debugShowCheckedModeBanner: false,
-          home:  const SearchBarScreen(),
+          home:   const HomePage(),
 
 
         ),

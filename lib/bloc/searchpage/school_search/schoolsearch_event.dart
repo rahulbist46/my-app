@@ -9,3 +9,10 @@ abstract class SchoolSearchEvent extends Equatable{
 
 }
  class FetchSchoolSearchEvent extends SchoolSearchEvent{}
+
+class SearchItem extends SchoolSearchEvent{
+
+  final  String stSearch;
+  const SearchItem( this.stSearch);
+
+}

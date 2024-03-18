@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:edhippo/modal/search_school/search_school_modal.dart';
 
@@ -8,16 +9,25 @@ class SchoolSearchRepository {
     try {
       final response = await http.post(
         Uri.parse('https://api.edhippo.com/api/school/list'),
-        headers: <String, String>{},
+        headers: <String, String>{
+
+        },
         body: jsonEncode(<String, dynamic>{
 
-          "limit": 100
+
+          "page": 0,
+          "limit":456
+
         }),
       );
 
       if (response.statusCode == 201) {
-        print('Request successful');
-        print('Response: ${response.body}');
+        if (kDebugMode) {
+          print('Request successful');
+        }
+        if (kDebugMode) {
+          print('Response: ${response.body}');
+        }
         final Map<String, dynamic> responseBody = json.decode(response.body);
 
         return List<SearchSchool>.from(responseBody["data"]["schools"]
@@ -26,6 +36,9 @@ class SchoolSearchRepository {
         throw Exception('Error: ${response.statusCode}');
       }
     } catch (e) {
+      if (kDebugMode) {
+        print('Error: $e');
+      }
       throw Exception('Error: $e');
     }
   }
