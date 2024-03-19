@@ -1,7 +1,6 @@
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_bloc.dart';
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_event.dart';
 import 'package:edhippo/screen_view/search_page/searchschoolcard.dart';
-import 'package:edhippo/ui_halper/util_colore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:edhippo/screen_view/search_page/search_bar.dart';
@@ -17,7 +16,7 @@ class SearchBarScreen extends StatefulWidget {
 class _SearchBarScreenState extends State<SearchBarScreen> {
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     context.read<SchoolSearchBloc>().add(FetchSchoolSearchEvent());
   }
@@ -42,43 +41,19 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
           child: Text('Search results'),
         ),
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(11.0),
+          padding: EdgeInsets.all(11.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SearchBarItem(),
-                searchCard(),
+                SearchBarItem(),
+                SearchCard(),
               ],
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: bgColor(),
-        onTap: (index) {
-
-        },
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: greenColor()),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: greenColor()),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite, color: greenColor()),
-            label: 'Favorite',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: greenColor()),
-            label: 'Profile',
-          ),
-        ],
       ),
     );
   }

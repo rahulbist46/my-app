@@ -1,17 +1,17 @@
-
-import 'package:edhippo/ui_halper/util_colore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_bloc.dart';
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_state.dart';
 import 'package:edhippo/modal/search_school/search_school_modal.dart';
 import 'package:edhippo/ui_halper/util_textstyle.dart';
 import 'package:edhippo/utils/enums.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+class SearchCard extends StatelessWidget {
+  const SearchCard({super.key});
 
-Widget searchCard() {
-  return SingleChildScrollView(
-    child: SizedBox(
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,35 +34,20 @@ Widget searchCard() {
                       ),
                     );
                   case DataStatus.success:
-                    return state.searchMessage.isNotEmpty ? Center(child: Text(state.searchMessage.toString())) :
-                    Column(
-                      children: [
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(), // Disable GridView scrolling
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 1.0,
-                            mainAxisSpacing: 8.0,
-                            childAspectRatio: 0.8,
-                          ),
-                          itemCount: state.temSearchSchoolsList.isEmpty ? state.searchSchoolsList.length : state.temSearchSchoolsList.length,
-                          itemBuilder: (context, index) {
-                            if (state.temSearchSchoolsList.isNotEmpty) {
-                              final name = state.temSearchSchoolsList[index];
-                              return ListTile(
-                                title: SchoolCard(searchSchool: name),
-                              );
-                            } else {
-                              final name = state.searchSchoolsList[index];
-                              return ListTile(
-                                title: SchoolCard(searchSchool: name),
-                              );
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 16), // Adjust the height as needed
-                      ],
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemCount: state.searchSchoolsList.length,
+                      itemBuilder: (context, index) {
+                        final name = state.searchSchoolsList[index];
+                        return SchoolCard(searchSchool: name);
+                      },
                     );
                   default:
                     return const Center(child: Text('Unknown state'));
@@ -72,15 +57,14 @@ Widget searchCard() {
           ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }
-
 
 class SchoolCard extends StatelessWidget {
   final SearchSchool searchSchool;
 
-  const SchoolCard({super.key, required this.searchSchool});
+  const SchoolCard({Key? key, required this.searchSchool}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +72,12 @@ class SchoolCard extends StatelessWidget {
       color: const Color(0xffEFF6FF),
       child: SizedBox(
         width: double.infinity,
-        height: 300,// Adjust card width to fill available space
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: double.infinity, // Adjust image width to fill available space
-              height: 150, // Increase image height
+              width: 185,
+              height: 150,
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -110,13 +93,13 @@ class SchoolCard extends StatelessWidget {
                       right: 8,
                       child: CircleAvatar(
                         radius: 15,
-                        backgroundColor: bgColor(),
+                        backgroundColor: Colors.red,
                         child: Icon(
                           searchSchool.isFavorite
                               ? Icons.favorite
                               : Icons.favorite_outline,
                           size: 20,
-                          color: greenColor1(),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -131,8 +114,7 @@ class SchoolCard extends StatelessWidget {
                         padding: const EdgeInsets.all(4),
                         child: Text(
                           searchSchool.type[0].name,
-                          style:
-                          bodyText12(color: whiteColor()),
+                          style: const TextStyle(fontSize: 12),
                         ),
                       ),
                     ),
@@ -140,49 +122,51 @@ class SchoolCard extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0), // Increase padding around text
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    searchSchool.name,
-                    style: bodyText11(),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      const Icon(Icons.location_on_outlined, size: 15,),
-                      const SizedBox(width: 8),
-                      Text(
-                        searchSchool.city.city,
-                        style: bodyText11(),
-                      ),
-                      const Spacer(),
-                      Text(
-                        searchSchool.avgRating.toString(), // This line needs correction
-                        style: bodyText11(),
-                      ),
-                      const Icon(Icons.star, color: Colors.yellow, size: 15,),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        searchSchool.classification.name,
-                        style: bodyText11(),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '${searchSchool.minFees}/y',
-                        style: bodyText11(),
-                      ),
-                    ],
-                  ),
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      searchSchool.name,
+                      style: bodyText11(),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        const Icon(Icons.location_on_outlined, size: 15,),
+                        const SizedBox(width: 8),
+                        Text(
+                          searchSchool.city.city,
+                          style: bodyText11(),
+                        ),
+                        const Spacer(),
+                        Text(
+                          searchSchool.avgRating.toString(), // This line needs correction
+                          style: bodyText11(),
+                        ),
+                        const Icon(Icons.star, color: Colors.yellow, size: 15,),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          searchSchool.classification.name,
+                          style: bodyText11(),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '${searchSchool.minFees}/y',
+                          style: bodyText11(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
