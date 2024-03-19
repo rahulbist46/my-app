@@ -1,4 +1,4 @@
-import 'package:edhippo/modal/category_modal/school_types.dart';
+import '../category_modal/school_types.dart';
 import 'package:edhippo/modal/city_modal/cities.dart';
 import 'package:edhippo/modal/classification/classification_modal.dart';
 import 'package:edhippo/modal/facility/facility_modal.dart';

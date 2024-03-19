@@ -8,6 +8,7 @@ import 'package:edhippo/modal/classification/classification_modal.dart';
 import 'package:edhippo/ui_halper/util_textstyle.dart';
 import '../../utils/enums.dart';
 
+// ignore: non_constant_identifier_names
 Widget ClassificationsData() {
   return SizedBox(
     height: 100,

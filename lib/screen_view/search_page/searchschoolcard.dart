@@ -64,7 +64,7 @@ class SearchCard extends StatelessWidget {
 class SchoolCard extends StatelessWidget {
   final SearchSchool searchSchool;
 
-  const SchoolCard({Key? key, required this.searchSchool}) : super(key: key);
+  const SchoolCard({super.key, required this.searchSchool});
 
   @override
   Widget build(BuildContext context) {

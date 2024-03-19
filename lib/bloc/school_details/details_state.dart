@@ -1,6 +1,35 @@
-part of 'details_bloc.dart';
+import 'package:edhippo/utils/enums.dart';
+import 'package:equatable/equatable.dart';
 
-@immutable
-sealed class DetailsState {}
+import '../../modal/school_details/details_modal.dart';
 
-final class DetailsInitial extends DetailsState {}
+class DetailsState extends Equatable{
+  final DataStatus dataStatus;
+  final List<DetailsModal> detailsList;
+  final String message;
+
+
+  const DetailsState({
+    this.dataStatus=DataStatus.loading,
+    this.detailsList=const<DetailsModal>[],
+    this.message=''
+});
+
+  DetailsState copyWith({
+    DataStatus? dataStatus,
+    List<DetailsModal>? detailsList,
+    String? message
+  }){
+    return DetailsState(
+    dataStatus: dataStatus ?? this.dataStatus,
+    detailsList: detailsList ?? this.detailsList,
+    message: message ?? this.message
+    );
+}
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [dataStatus,detailsList,message];
+
+
+}

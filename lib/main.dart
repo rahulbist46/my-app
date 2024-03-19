@@ -4,6 +4,7 @@ import 'package:edhippo/bloc/filter_page/school_board/school_board_bloc.dart';
 import 'package:edhippo/bloc/homepage/category/category_bloc.dart';
 import 'package:edhippo/bloc/homepage/city/cities_bloc.dart';
 import 'package:edhippo/bloc/homepage/featuredschools/featuredschools_bloc.dart';
+import 'package:edhippo/bloc/school_details/details_bloc.dart';
 import 'package:edhippo/bloc/searchpage/school_search/schoolsearch_bloc.dart';
 import 'package:edhippo/screen_view/homepage/homepage_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +31,13 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => SchoolSearchBloc()),
           BlocProvider(create: (_) => SchoolBoardBloc()),
           BlocProvider(create: (_) => SchoolClassificationBloc()),
+          BlocProvider(create: (_) => DetailsBloc()),
 
 
 
 
         ],
-        child: MaterialApp(
+        child:MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
 

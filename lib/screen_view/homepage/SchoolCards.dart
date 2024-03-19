@@ -7,6 +7,8 @@ import 'package:edhippo/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../school_details/svhoolDetail_screen.dart';
+
 Widget schoolCards() {
   return SingleChildScrollView(
     child: SizedBox(
@@ -63,14 +65,21 @@ Widget schoolCards() {
 class SchoolCard extends StatelessWidget {
   final FeaturedSchools featuredSchools;
 
-
-  const SchoolCard({super.key, required this.featuredSchools, });
+  const SchoolCard({super.key, required this.featuredSchools});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SchoolDetails(
+              schoolId: featuredSchools.id,
 
+            ),
+          ),
+        );
       },
       child: Card(
         color: bgColor1().withOpacity(0.5),
@@ -114,7 +123,7 @@ class SchoolCard extends StatelessWidget {
                           padding: const EdgeInsets.all(4),
                           child: Text(featuredSchools.types[0].name,
                           style: bodyText12(),),
-      
+
                         ),
                       ),
                     ],
@@ -149,7 +158,7 @@ class SchoolCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(featuredSchools.classification.name,style: bodyText11(color: greenColor1()),),
-      
+
                         Text(featuredSchools.maxFees.toString(),style: bodyText11(),), // Fee placeholder
                       ],
                     ),
